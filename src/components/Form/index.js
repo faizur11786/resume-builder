@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 import AddEducation from '../Modals/AddEducation';
 import AddExperience from '../Modals/AddExperience';
 import AddSkills from "../Skills";
 
-const Form = () => {
+const Form = ( props ) => {
 
+
+    const history = useHistory()
+
+
+    console.log("props", props);
     const [basicDetails, setDasicDetails] = useState( {
         name: '',
         email: "",
@@ -14,6 +20,8 @@ const Form = () => {
         address: ""
     } )
 
+    const { education, experience } = useSelector( state => state.app )
+    console.log( education, experience );
     const dispatch = useDispatch()
 
 
@@ -34,9 +42,8 @@ const Form = () => {
         } else {
             console.log( "yes" );
             dispatch( { type: "SAVE_USER_DATA", payload: basicDetails } )
+            history.push("/viewer")
         }
-
-
     }
 
 
@@ -89,32 +96,47 @@ const Form = () => {
                 </div>
                 <div className="section--body">
                     <div className="list--group">
-                        <div className="list--item">
-                            <div className="list--details">
-                                <h5>University at Buffalo</h5>
-                                <p>Noida, Uttar Pradesh, India</p>
-                            </div>
-                        </div>
-                        <AddExperience />
+                        {experience ? (
+                            <>
+                                {experience?.map( ( item, index ) => (
+                                    <div className="list--item" key={index}>
+                                        <div className="list--details">
+                                            <h5>{item.title}</h5>
+                                            <p><b>{item.company}</b>{` ${item.designation} ${ item.year }` }</p>
+                                        </div>
+                                    </div>
+                                ))}
+                                <AddExperience />
+                            </>
+                        ) : (
+                            <AddExperience />
+                        )}
                     </div>
-
                 </div>
             </div>
             <div className="form--section">
                 <div className="section--head">
-                    <h4> Education</h4>
+                    <h4>Education</h4>
                 </div>
                 <div className="section--body">
                     <div className="list--group">
-                        <div className="list--item">
-                            <div className="list--details">
-                                <h5>University at Buffalo</h5>
-                                <p>Noida, Uttar Pradesh, India</p>
-                            </div>
-                        </div>
-                        <AddEducation />
+                        {education ? (
+                            <>
+                                {education?.map( ( item, index ) => (
+                                    <div className="list--item" key={index}>
+                                        <div className="list--details">
+                                            <h5>{item.instutite}</h5>
+                                            <p><b>{item.degree}</b>{` ${item.year}`}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                                <AddEducation />
+                            </>
+                        ) : (
+                            <AddEducation />
+                        )}
+                        
                     </div>
-
                 </div>
             </div>
             <button type="button" className="btn btn-dark btn-block" onClick={submitHandler}>Submit</button>
