@@ -1,11 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
     return (
         <div className="container">
             <nav className="navbar navbar-light px-0 my-3">
-                <a className="navbar-brand" href="#">Resume Builder</a>
-                <button type="button" className="btn btn-dark">See your Resume</button>
+                <Link className="navbar-brand" to="/">Resume Builder</Link>
             </nav>
         </div>
     )

@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 const AddExperience = () => {
 
     const [expData, setExpData] = useState( {
-        title: "",
         company: "",
         year: "",
         designation: ""
@@ -18,11 +17,8 @@ const AddExperience = () => {
 
 
     const submitHandler = () => {
-        const { title, company, year, designation } = expData;
-        if ( !title ) {
-            toast.error( "Please Enter Title " )
-            return
-        } else if ( !company ) {
+        const { company, year, designation } = expData;
+        if ( !company ) {
             toast.error( "Please Enter Company Name " );
             return
         } else if ( !year ) {
@@ -33,6 +29,11 @@ const AddExperience = () => {
             return
         } else {
             dispatch( { type: "SAVE_USER_EXP", payload: expData } )
+            setExpData( {
+                company: "",
+                year: "",
+                designation: ""
+            } )
         }
     }
 
@@ -52,14 +53,6 @@ const AddExperience = () => {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <div className="form-group mb-3">
-                                <label htmlFor="title">Title</label>
-                                <input
-                                    type="text" className="form-control"
-                                    value={expData.title}
-                                    onChange={e => setExpData( { ...expData, title: e.target.value } )}
-                                    id="title" />
-                            </div>
                             <div className="form-group mb-3">
                                 <label htmlFor="company">Company</label>
                                 <input

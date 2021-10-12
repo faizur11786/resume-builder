@@ -28,6 +28,11 @@ const AddEducation = () => {
             return
         } else {
             dispatch( { type: "SAVE_USER_EDU", payload: eduData } )
+            setEduData( {
+                instutite: "",
+                degree: "",
+                year: "",
+            } )
         }
     }
 

@@ -12,7 +12,7 @@ const Form = ( props ) => {
     const history = useHistory()
 
 
-    console.log("props", props);
+    console.log( "props", props );
     const [basicDetails, setDasicDetails] = useState( {
         name: '',
         email: "",
@@ -42,7 +42,7 @@ const Form = ( props ) => {
         } else {
             console.log( "yes" );
             dispatch( { type: "SAVE_USER_DATA", payload: basicDetails } )
-            history.push("/viewer")
+            history.push( "/viewer" )
         }
     }
 
@@ -101,11 +101,11 @@ const Form = ( props ) => {
                                 {experience?.map( ( item, index ) => (
                                     <div className="list--item" key={index}>
                                         <div className="list--details">
-                                            <h5>{item.title}</h5>
-                                            <p><b>{item.company}</b>{` ${item.designation} ${ item.year }` }</p>
+                                            <h5>{item.company}</h5>
+                                            <p><b>{item.designation}</b>{` - ${item.year}`}</p>
                                         </div>
                                     </div>
-                                ))}
+                                ) )}
                                 <AddExperience />
                             </>
                         ) : (
@@ -129,13 +129,13 @@ const Form = ( props ) => {
                                             <p><b>{item.degree}</b>{` ${item.year}`}</p>
                                         </div>
                                     </div>
-                                ))}
+                                ) )}
                                 <AddEducation />
                             </>
                         ) : (
                             <AddEducation />
                         )}
-                        
+
                     </div>
                 </div>
             </div>
