@@ -90,7 +90,7 @@ const AddExperience = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-light" data-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-dark" onClick={submitHandler}>Save</button>
+                            <button type="button" className="btn btn-dark" onClick={submitHandler} data-dismiss="modal">Save</button>
                         </div>
                     </div>
                 </div>

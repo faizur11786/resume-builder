@@ -8,7 +8,6 @@ const Header = () => {
                 <button type="button" className="btn btn-dark">See your Resume</button>
             </nav>
         </div>
-
     )
 }
 
